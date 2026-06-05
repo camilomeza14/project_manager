@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Manager",
+      "email": "manager@test.com",
+      "password": "123456",
+      "role": "manager"
+    },
+    {
+      "id": "2",
+      "name": "Collaborator",
+      "email": "user@test.com",
+      "password": "123456",
+      "role": "collaborator"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "name": "Website Redesign",
+      "description": "Corporate website redesign",
+      "status": "In Progress",
+      "createdAt": "2025-01-15",
+      "assignedTo": 2
+    },
+    {
+      "id": "2",
+      "name": "Mobile App",
+      "description": "New mobile application for clients",
+      "status": "Pending",
+      "createdAt": "2025-02-10",
+      "assignedTo": 2
+    },
+    {
+      "id": "3",
+      "name": "API Integration",
+      "description": "Third-party API integration",
+      "status": "Completed",
+      "createdAt": "2025-03-01",
+      "assignedTo": 2
+    },
+    {
+      "name": "camilo",
+      "description": "",
+      "status": "In Progress",
+      "assignedTo": 2,
+      "createdAt": "2026-06-05",
+      "id": "ppI8LNZ9tO4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
