@@ -1,4 +1,3 @@
-// router.js - SPA router con hash (#)
 import { isLoggedIn } from "./utils/session.js";
 import { renderLogin } from "./views/login.js";
 import { renderDashboard } from "./views/dashboard.js";
