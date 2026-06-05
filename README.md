@@ -1,6 +1,6 @@
 # ProjectManager
 
-Internal project management SPA for Riwi performance assessment.
+Internal project management SPA for Task performance assessment.
 
 ## Description
 
