@@ -1,4 +1,3 @@
-// login.js - Vista de inicio de sesión
 import { loginUser } from "../services/auth.js";
 import { saveSession } from "../utils/session.js";
 
@@ -9,20 +8,20 @@ export function renderLogin(navigate) {
     <div class="login-container">
       <div class="login-card">
         <div class="login-header">
-          <h1>ProjectManager</h1>
-          <p>Ingresa a tu cuenta</p>
+          <h1>Reservations Manager</h1>
+          <p>Log in to your account</p>
         </div>
         <form id="loginForm" novalidate>
           <div class="form-group">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" placeholder="correo@ejemplo.com" required />
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="email@example.com" required />
           </div>
           <div class="form-group">
-            <label for="password">Contraseña</label>
+            <label for="password">Password</label>
             <input type="password" id="password" placeholder="••••••" required />
           </div>
           <div id="loginError" class="error-msg hidden"></div>
-          <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+          <button type="submit" class="btn btn-primary btn-full">Log in</button>
         </form>
       </div>
     </div>
@@ -35,7 +34,7 @@ export function renderLogin(navigate) {
     const errorDiv = document.getElementById("loginError");
 
     if (!email || !password) {
-      errorDiv.textContent = "Todos los campos son obligatorios.";
+      errorDiv.textContent = "All fields are required.";
       errorDiv.classList.remove("hidden");
       return;
     }
