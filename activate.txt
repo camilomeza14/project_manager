@@ -32,3 +32,7 @@ sudo apt install nodejs npm
 node -v
 
 En todos los casos al final verifica con node -v que muestre un número. Si aparece → listo, puedes correr el proyecto.
+
+
+
+full reservations 4, in progress 1, completed 1 
