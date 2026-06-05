@@ -1,4 +1,3 @@
-// projects.js - Vista CRUD de proyectos
 import { getSession, isManager } from "../utils/session.js";
 import {
   getAllProjects,
@@ -21,8 +20,8 @@ export async function renderProjects() {
   app.innerHTML = `
     <div class="projects-container">
       <div class="projects-header">
-        <h2>Proyectos</h2>
-        ${isManager() ? `<button id="btnNewProject" class="btn btn-primary">+ Nuevo Proyecto</button>` : ""}
+        <h2>Booking</h2>
+        ${isManager() ? `<button id="btnNewProject" class="btn btn-primary">+ New Booking</button>` : ""}
       </div>
       <div id="projectsList" class="projects-grid"></div>
       <div id="projectModal" class="modal hidden"></div>
@@ -43,7 +42,7 @@ function renderProjectCards(projects) {
   const user = getSession();
 
   if (projects.length === 0) {
-    list.innerHTML = `<p class="empty-msg">No hay proyectos disponibles.</p>`;
+    list.innerHTML = `<p class="empty-msg">No reservations available</p>`;
     return;
   }
 
@@ -58,12 +57,12 @@ function renderProjectCards(projects) {
       <p class="card-desc">${p.description}</p>
       <p class="card-date">Creado: ${p.createdAt}</p>
       <div class="card-actions">
-        <button class="btn btn-sm btn-secondary btn-detail" data-id="${p.id}">Ver</button>
+        <button class="btn btn-sm btn-secondary btn-detail" data-id="${p.id}">View</button>
         ${
           isManager()
-            ? `<button class="btn btn-sm btn-warning btn-edit" data-id="${p.id}">Editar</button>
-               <button class="btn btn-sm btn-danger btn-delete" data-id="${p.id}">Eliminar</button>`
-            : `<button class="btn btn-sm btn-warning btn-status" data-id="${p.id}" data-status="${p.status}">Cambiar estado</button>`
+            ? `<button class="btn btn-sm btn-warning btn-edit" data-id="${p.id}">Edit</button>
+               <button class="btn btn-sm btn-danger btn-delete" data-id="${p.id}">Delete</button>`
+            : `<button class="btn btn-sm btn-warning btn-status" data-id="${p.id}" data-status="${p.status}">Change status</button>`
         }
       </div>
     </div>
@@ -71,10 +70,10 @@ function renderProjectCards(projects) {
     )
     .join("");
 
-  // Eventos de las tarjetas
+  
   list.querySelectorAll(".btn-delete").forEach((btn) => {
     btn.addEventListener("click", async () => {
-      if (confirm("¿Eliminar este proyecto?")) {
+      if (confirm("¿Delete this reservation")) {
         await deleteProject(btn.dataset.id);
         renderProjects();
       }
@@ -109,18 +108,18 @@ function openProjectModal(project) {
   modal.innerHTML = `
     <div class="modal-overlay">
       <div class="modal-box">
-        <h3>${isEditing ? "Editar Proyecto" : "Nuevo Proyecto"}</h3>
+        <h3>${isEditing ? "Edit Reservation" : "New Reservation"}</h3>
         <form id="projectForm">
           <div class="form-group">
-            <label>Nombre</label>
+            <label>Name</label>
             <input type="text" id="pName" value="${isEditing ? project.name : ""}" required />
           </div>
           <div class="form-group">
-            <label>Descripción</label>
+            <label>Description</label>
             <textarea id="pDesc" rows="3">${isEditing ? project.description : ""}</textarea>
           </div>
           <div class="form-group">
-            <label>Estado</label>
+            <label>Status</label>
             <select id="pStatus">
               ${STATUSES.map(
                 (s) =>
@@ -129,12 +128,12 @@ function openProjectModal(project) {
             </select>
           </div>
           <div class="form-group">
-            <label>Responsable (ID usuario)</label>
+            <label>Responsable (ID user)</label>
             <input type="number" id="pAssigned" value="${isEditing ? project.assignedTo : 2}" />
           </div>
           <div class="modal-footer">
             <button type="button" id="btnCancelModal" class="btn btn-secondary">Cancelar</button>
-            <button type="submit" class="btn btn-primary">${isEditing ? "Guardar" : "Crear"}</button>
+            <button type="submit" class="btn btn-primary">${isEditing ? "Save" : "Create"}</button>
           </div>
         </form>
       </div>
@@ -172,9 +171,9 @@ function openStatusModal(projectId, currentStatus) {
   modal.innerHTML = `
     <div class="modal-overlay">
       <div class="modal-box">
-        <h3>Actualizar Estado</h3>
+        <h3>Update Status</h3>
         <div class="form-group">
-          <label>Nuevo estado</label>
+          <label>New status</label>
           <select id="newStatus">
             ${STATUSES.map(
               (s) => `<option value="${s}" ${s === currentStatus ? "selected" : ""}>${s}</option>`
@@ -182,8 +181,8 @@ function openStatusModal(projectId, currentStatus) {
           </select>
         </div>
         <div class="modal-footer">
-          <button id="btnCancelStatus" class="btn btn-secondary">Cancelar</button>
-          <button id="btnSaveStatus" class="btn btn-primary">Guardar</button>
+          <button id="btnCancelStatus" class="btn btn-secondary">Cancel</button>
+          <button id="btnSaveStatus" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
@@ -210,10 +209,10 @@ function openDetailModal(project) {
     <div class="modal-overlay">
       <div class="modal-box">
         <h3>${project.name}</h3>
-        <p><strong>Descripción:</strong> ${project.description}</p>
-        <p><strong>Estado:</strong> ${project.status}</p>
-        <p><strong>Creado:</strong> ${project.createdAt}</p>
-        <p><strong>Responsable ID:</strong> ${project.assignedTo}</p>
+        <p><strong>Description:</strong> ${project.description}</p>
+        <p><strong>Status:</strong> ${project.status}</p>
+        <p><strong>Created:</strong> ${project.createdAt}</p>
+        <p><strong>Responsible ID:</strong> ${project.assignedTo}</p>
         <div class="modal-footer">
           <button id="btnCloseDetail" class="btn btn-secondary">Cerrar</button>
         </div>
